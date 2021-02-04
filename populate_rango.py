@@ -23,7 +23,7 @@ def populate():
         {"title": "Django Rocks",
         "url": "http://www.djangorocks.com/"},
         {"title": "How to Tango with Django",
-        "url": "http:/www.tangowithdjango.com/"}
+        "url": "http://www.tangowithdjango.com/"}
     ]
 
     other_pages = [
@@ -37,10 +37,12 @@ def populate():
             "Django": {"pages": django_pages, "views": 64, "likes": 32},
             "Other Frameworks": {"pages": other_pages, "views": 32, "likes": 16}}
 
+    v = 1
     for cat, cat_data in cats.items():
         c = add_cat(cat, cat_data["views"], cat_data["likes"])
         for p in cat_data["pages"]:
-            add_page(c, p["title"], p["url"])
+            add_page(c, p["title"], p["url"], views = v)
+            v = v + 2
 
     for c in Category.objects.all():
         for p in Page.objects.filter(category=c):
